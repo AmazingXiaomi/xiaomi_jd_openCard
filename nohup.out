@@ -123,3 +123,6 @@ requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=
 2022-09-09 23:52:45,109 - __main__ - INFO - 启动成功，开始监听群消息
 2022-09-09 23:52:49,380 - __main__ - INFO - 9
 2022-09-09 23:52:49,381 - __main__ - INFO - 文件下载成功:新建 文本文档.txt
+2022-09-09 23:52:51,680 - __main__ - INFO - git push
+2022-09-09 23:52:59,166 - __main__ - INFO - 9
+2022-09-09 23:52:59,166 - __main__ - INFO - 文件下载成功:新建 文本文档.txt

@@ -126,3 +126,5 @@ requests.exceptions.SSLError: HTTPSConnectionPool(host='api.telegram.org', port=
 2022-09-09 23:52:51,680 - __main__ - INFO - git push
 2022-09-09 23:52:59,166 - __main__ - INFO - 9
 2022-09-09 23:52:59,166 - __main__ - INFO - 文件下载成功:新建 文本文档.txt
+2022-09-09 23:53:00,594 - __main__ - INFO - git push
+2022-09-09 23:53:42,148 - __main__ - INFO - xiaomi_jd_openCard(-1001420873978)消息：删除 新建 文本文档.txt

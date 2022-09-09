@@ -11,6 +11,8 @@ import requests
 import time,os, json
 from retrying import retry
 
+requests.packages.urllib3.disable_warnings()
+
 botToken="5528541550:AAHMN2eOC-6W1PkreoQcHfnIwhEzjXmecg4"
 updateId = None
 listem_id=-1001714808788
@@ -19,8 +21,8 @@ s = requests.session()
 s.keep_alive = False
 proxy='socks5://127.0.0.1:7891'
 proxies={
-    'http': proxy,
-    'https': proxy
+    'http': "http://127.0.0.1:7890",
+    'https': "http://127.0.0.1:7890"
 }
 
 def getUpdates(offset):

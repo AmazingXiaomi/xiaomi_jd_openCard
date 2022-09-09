@@ -40,9 +40,9 @@ def getUpdates(offset):
             if(("message" in message)==False):
                 updateId = message["update_id"]+1 
                 break
-            if (message["message"]["from"]["id"]!=5433065757):
-                updateId = message["update_id"]+1
-                break
+           # if (message["message"]["from"]["id"]!=5433065757):
+           #     updateId = message["update_id"]+1
+           #     break
             chat_id = message["message"]["chat"]["id"]
             if (message["message"]["chat"]["id"]==listem_id):
                 if("document" in message["message"]):

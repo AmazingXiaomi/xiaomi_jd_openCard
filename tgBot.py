@@ -28,7 +28,7 @@ def getUpdates(offset):
         url = "https://api.telegram.org/bot"+botToken+"/getUpdates?offset="+str(offset)
     else:
         url = "https://api.telegram.org/bot"+botToken+"/getUpdates"
-    response = requests.request("GET", url, data=None, headers=None,proxies=proxies)
+    response = requests.request("GET", url, data=None, headers=None,proxies=proxies,verify=False)
     resultStr = response.text
     result = json.loads(resultStr)
     if (result["ok"]==True):
@@ -62,13 +62,13 @@ def getUpdates(offset):
 def downFile(fileId,file_name,chat_id):
     sendMsg(chat_id,"开始上传:"+file_name)
     fileIdUrl = "https://api.telegram.org/bot"+botToken+"/getFile?file_id="+fileId
-    response = requests.request("GET", fileIdUrl, data=None, headers=None,proxies=proxies)
+    response = requests.request("GET", fileIdUrl, data=None, headers=None,proxies=proxies,verify=False)
     resultStr = response.text
     result = json.loads(resultStr)
     if (result["ok"]==True):
         filePath = result["result"]["file_path"]
         filePathUrl = "https://api.telegram.org/file/bot"+botToken+"/"+filePath
-        down_res = requests.request("GET", filePathUrl, data=None, headers=None,proxies=proxies)
+        down_res = requests.request("GET", filePathUrl, data=None, headers=None,proxies=proxies,verify=False)
         with open(file_name,"wb") as code:
             b = code.write(down_res.content)
             print(b)
@@ -105,7 +105,7 @@ def push(git):
 
 def sendMsg(chat_id,text):
     url = "https://api.telegram.org/bot"+botToken+"/sendMessage?chat_id="+str(chat_id)+"&text="+text
-    response = requests.request("GET", url, data=None, headers=None,proxies=proxies)
+    response = requests.request("GET", url, data=None, headers=None,proxies=proxies,verify=False)
     resultStr = response.text
 if __name__ == '__main__':
     # api.run(port=9001, debug=True, host='0.0.0.0')

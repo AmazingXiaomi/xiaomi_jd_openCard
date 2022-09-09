@@ -6,7 +6,7 @@
 # pip install retrying
 # 
 from git import Repo
-from turtle import update
+#from turtle import update
 import requests
 import time,os, json
 from retrying import retry

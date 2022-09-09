@@ -3,27 +3,31 @@
 # @time    : 2022/04/09 21:27
 # @author  : xiaomi
 # @desc    :tg机器人上传代码到git
-# pip install retrying
+# 依赖：
+#pip install gitpython
+#pip install retrying
+#pip install pysocks
 #
 from git import Repo
 #from turtle import update
 import requests
 import time,os, json
 from retrying import retry
-
 requests.packages.urllib3.disable_warnings()
 
-botToken="5528541550:AAHMN2eOC-6W1PkreoQcHfnIwhEzjXmecg4"
-updateId = None
-listem_id=-1001420873978
-
-s = requests.session()
-s.keep_alive = False
-proxy='socks5://127.0.0.1:7891'
+#botToken 
+botToken="55555555555:aaaaaaaaaaaaaaaaaa"
+#要监听的群组id
+listem_id= -123333333333
+#代理地址
 proxies={
     'http': "http://127.0.0.1:7890",
     'https': "http://127.0.0.1:7890"
 }
+
+updateId = None
+s = requests.session()
+s.keep_alive = False
 
 def getUpdates(offset):
     global updateId
@@ -40,9 +44,9 @@ def getUpdates(offset):
             if(("message" in message)==False):
                 updateId = message["update_id"]+1 
                 break
-           # if (message["message"]["from"]["id"]!=5433065757):
-           #     updateId = message["update_id"]+1
-           #     break
+            # if (message["message"]["from"]["id"]!=5433065757):
+            #     updateId = message["update_id"]+1
+            #     break
             chat_id = message["message"]["chat"]["id"]
             if (message["message"]["chat"]["id"]==listem_id):
                 if("document" in message["message"]):
@@ -116,7 +120,6 @@ def sendMsg(chat_id,text):
     response = requests.request("GET", url, data=None, headers=None,proxies=proxies,verify=False)
     resultStr = response.text
 if __name__ == '__main__':
-    # api.run(port=9001, debug=True, host='0.0.0.0')
     while True:
         getUpdates(updateId)
         time.sleep(3)

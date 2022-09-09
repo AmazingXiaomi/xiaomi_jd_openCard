@@ -4,7 +4,7 @@
 # @author  : xiaomi
 # @desc    :tg机器人上传代码到git
 # pip install retrying
-# 
+#
 from git import Repo
 #from turtle import update
 import requests
@@ -15,7 +15,8 @@ botToken="5528541550:AAHMN2eOC-6W1PkreoQcHfnIwhEzjXmecg4"
 updateId = None
 listem_id=-1001714808788
 
-
+s = requests.session()
+s.keep_alive = False
 proxy='socks5://127.0.0.1:7891'
 proxies={
     'http': proxy,

@@ -15,7 +15,7 @@ requests.packages.urllib3.disable_warnings()
 
 botToken="5528541550:AAHMN2eOC-6W1PkreoQcHfnIwhEzjXmecg4"
 updateId = None
-listem_id=-1001714808788
+listem_id=-1001420873978
 
 s = requests.session()
 s.keep_alive = False
@@ -26,6 +26,7 @@ proxies={
 }
 
 def getUpdates(offset):
+    global updateId
     if (offset):
         url = "https://api.telegram.org/bot"+botToken+"/getUpdates?offset="+str(offset)
     else:
@@ -36,28 +37,32 @@ def getUpdates(offset):
     if (result["ok"]==True):
         messages = result["result"]
         for message in messages:
+            if(("message" in message)==False):
+                updateId = message["update_id"]+1 
+                break
             if (message["message"]["from"]["id"]!=5433065757):
-                return
+                updateId = message["update_id"]+1
+                break
             chat_id = message["message"]["chat"]["id"]
             if (message["message"]["chat"]["id"]==listem_id):
                 if("document" in message["message"]):
                     file_name = message["message"]["document"]["file_name"]
                     downFile(message["message"]["document"]["file_id"],file_name,chat_id)
                 else:
-                    text = message["message"]["text"]
-                    print(message["message"]["chat"]["title"]+"("+str(message["message"]["chat"]["id"])+")消息："+text)
-                    if("删除 " in text):
-                        fileName = text.split( )[1]
-                        sendMsg(chat_id,"开始删除: "+fileName)
-                        try:
-                            os.unlink(fileName)
-                        except:
-                            sendMsg(chat_id,"本地文件不存在")
-                        if(pushFile()):
-                            sendMsg(chat_id,fileName+"删除成功")
-                        else:
-                            sendMsg(chat_id,fileName+"删除失败,网络异常")
-                global updateId
+                    if("text" in message["message"]):
+                        text = message["message"]["text"]
+                        print(message["message"]["chat"]["title"]+"("+str(message["message"]["chat"]["id"])+")消息："+text)
+                        if("删除 " in text):
+                            fileName = text.split( )[1]
+                            sendMsg(chat_id,"开始删除: "+fileName)
+                            try:
+                                os.unlink(fileName)
+                            except:
+                                sendMsg(chat_id,"本地文件不存在")
+                            if(pushFile()):
+                                sendMsg(chat_id,fileName+"删除成功")
+                            else:
+                                sendMsg(chat_id,fileName+"删除失败,网络异常")
                 updateId = message["update_id"]+1
 
 

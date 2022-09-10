@@ -109,5 +109,9 @@ def sendMsg(chat_id,text):
 if __name__ == '__main__':
     # api.run(port=9001, debug=True, host='0.0.0.0')
     while True:
-        getUpdates(updateId)
+        try:
+            getUpdates(updateId)
+        except:
+            logger.info("网络异常")
         time.sleep(3)
+
